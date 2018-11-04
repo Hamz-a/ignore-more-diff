@@ -1,0 +1,25 @@
+<idea-plugin>
+    <id>me.bhamza.ignore-more-diff</id>
+    <name>Ignore more differ</name>
+    <vendor email="dzcyberdev@gmail.com" url="https://bhamza.me">bhamza</vendor>
+
+    <description><![CDATA[
+    Ignore more diff results, spend less time reviewing!
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <diff.lang.DiffIgnoredRangeProvider implementation="IgnoreMoreDiff" order="first"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+
+    </actions>
+</idea-plugin>
