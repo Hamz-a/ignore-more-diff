@@ -13,12 +13,20 @@
     <depends>com.intellij.modules.lang</depends>
     -->
 
+    <!-- not sure about the version requirement -->
+    <idea-version since-build="160.0"/>
+
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
         <diff.lang.DiffIgnoredRangeProvider implementation="IgnoreMoreDiff" order="first"/>
+        <applicationConfigurable groupId="tools" displayName="Ignore More Diff" id="me.bhamza.IgnoreMoreDiffConfigurable" instance="IgnoreMoreDiffConfigurable"/>
+        <applicationService serviceImplementation="IgnoreMoreDiffConfiguration"/>
     </extensions>
 
     <actions>
         <!-- Add your actions here -->
+        <action id="me.bhamza.IgnoreMoreDiffConfigAction" class="IgnoreMoreDiffConfigAction" text="Ignore more differences configuration" description="Ignore more differences configuration2">
+            <add-to-group group-id="Diff.ViewerToolbar" anchor="first"/>
+        </action>
     </actions>
 </idea-plugin>

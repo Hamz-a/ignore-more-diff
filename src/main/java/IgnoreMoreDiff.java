@@ -13,7 +13,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class IgnoreMoreDiff extends LangDiffIgnoredRangeProvider {
+    IgnoreMoreDiffConfiguration diffConfig;
     String[] ignored_annotations = {"@Deprecated", "@Nullable", "@NonNull"};
+
+    public IgnoreMoreDiff() {
+        diffConfig = IgnoreMoreDiffConfiguration.getInstance();
+    }
 
     @NotNull
     @Override
@@ -57,12 +62,13 @@ public class IgnoreMoreDiff extends LangDiffIgnoredRangeProvider {
     }
 
     private boolean isIgnored(@NotNull PsiElement element) {
-        if(element instanceof PsiWhiteSpace) return true;
-        if(element instanceof PsiImportList) return true;
-        if(element instanceof PsiComment) return true;
+        if(element instanceof PsiWhiteSpace && diffConfig.isWhitespaceToggle()) return true;
+        if(element instanceof PsiImportList && diffConfig.isImportToggle()) return true;
+        if(element instanceof PsiComment && diffConfig.isCommentToggle()) return true;
         if(element instanceof PsiAnnotation) {
             return Arrays.stream(ignored_annotations).anyMatch(element.getText()::equals);
         }
+
         return false;
     }
 }
