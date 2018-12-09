@@ -14,7 +14,6 @@ import java.util.List;
 
 public class IgnoreMoreDiff extends LangDiffIgnoredRangeProvider {
     IgnoreMoreDiffConfiguration diffConfig;
-    String[] ignored_annotations = {"@Deprecated", "@Nullable", "@NonNull"};
 
     public IgnoreMoreDiff() {
         diffConfig = IgnoreMoreDiffConfiguration.getInstance();
@@ -65,8 +64,8 @@ public class IgnoreMoreDiff extends LangDiffIgnoredRangeProvider {
         if(element instanceof PsiWhiteSpace && diffConfig.isWhitespaceToggle()) return true;
         if(element instanceof PsiImportList && diffConfig.isImportToggle()) return true;
         if(element instanceof PsiComment && diffConfig.isCommentToggle()) return true;
-        if(element instanceof PsiAnnotation) {
-            return Arrays.stream(ignored_annotations).anyMatch(element.getText()::equals);
+        if(element instanceof PsiAnnotation && diffConfig.isAnnotationsToggle()) {
+            return diffConfig.getAnnotations().stream().anyMatch(element.getText().substring(1)::equals);
         }
 
         return false;

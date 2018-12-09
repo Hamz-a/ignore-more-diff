@@ -3,16 +3,21 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+import java.util.List;
+
 @State(
     name="IgnoreMoreDiffConfiguration",
     storages = {
-        @Storage("IgnoreMoreDiffConfiguration2223.xml")
+        @Storage("IgnoreMoreDiffConfiguration.xml")
     }
 )
 public class IgnoreMoreDiffConfiguration implements PersistentStateComponent<IgnoreMoreDiffConfiguration> {
     public boolean whitespaceToggle = true;
     public boolean commentToggle = true;
     public boolean importToggle = true;
+    public boolean annotationsToggle = true;
+    public List<String> annotations = Arrays.asList("Deprecated", "Nullable", "NonNull");
 
     @Nullable
     @Override
@@ -52,5 +57,21 @@ public class IgnoreMoreDiffConfiguration implements PersistentStateComponent<Ign
 
     public void setImportToggle(boolean importToggle) {
         this.importToggle = importToggle;
+    }
+
+    public boolean isAnnotationsToggle() {
+        return annotationsToggle;
+    }
+
+    public void setAnnotationsToggle(boolean annotationsToggle) {
+        this.annotationsToggle = annotationsToggle;
+    }
+
+    public List<String> getAnnotations() {
+        return annotations;
+    }
+
+    public void setAnnotations(List<String> annotations) {
+        this.annotations = annotations;
     }
 }
